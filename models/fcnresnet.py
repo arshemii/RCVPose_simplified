@@ -322,11 +322,3 @@ class ResFCNResNet152(nn.Module):
 
         return seg_pred, radial_pred
 
-if __name__=="__main__":
-    # test varying input size
-    import numpy as np
-    import torch
-    import os
-    from torchsummary import summary
-    net=ResFCNResNet152(3,1).to('cuda')
-    summary(net,(3,480,640))
