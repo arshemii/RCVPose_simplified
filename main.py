@@ -1,3 +1,11 @@
+import torch
+from utils import get_config, get_log_dir, str2bool
+from data_loader import get_loader
+from train import Trainer
+import warnings
+from tensorboardX import SummaryWriter
+warnings.filterwarnings('ignore')
+
 resume = ''
 
 if __name__ == "__main__":
@@ -9,6 +17,7 @@ if __name__ == "__main__":
                         type=str,
                         default='train',
                         choices=['train', 'test'])
+    # Need to be adjusted the root_dataset
     parser.add_argument("--root_dataset",
                         type=str,
                         default='./dataset/LINEMOD')
@@ -27,6 +36,12 @@ if __name__ == "__main__":
     parser.add_argument('--model_dir',
                     type=str,
                     default='ckpts/')   
+    parser.add_argument('--dname',
+                        type=str,
+                        default='lm')
+    parser.add_argument("--optim",
+                        type=str,
+                        default='Adam')
 
     opts = parser.parse_args()
 
