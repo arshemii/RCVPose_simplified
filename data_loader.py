@@ -120,7 +120,7 @@ class RData(RMapDataset):
 
 def get_loader(opts):
     from data_loader import RData
-    modes = ['val', 'val']
+    modes = ['train', 'val']
     train_loader = data.DataLoader(RData(opts.root_dataset,
                                         opts.dname,
                                         set=modes[0],
