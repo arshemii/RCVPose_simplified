@@ -60,20 +60,12 @@ class RMapDataset(Dataset):
     def __getitem__(self, item):
         img_id = self.ids[item]
 
-        if self.dname == 'lm':
-            #target = np.load(self._radialpath % img_id)
-            depth = read_depth(self._depthpath % str(int(img_id)))
-            mask = np.asarray(Image.open((self._maskpath % str(int(img_id)).zfill(4))),dtype=int)[:,:,0]
-            gtpose = np.load(self._gtposepath% str(int(img_id)))
-            img = Image.open(self._imgpath % img_id).convert('RGB')
-        else:
-            #print(self._h5path)
-            ycbh5f = h5py.File(self._h5path, 'r')
-            target = np.array(ycbh5f['3Dradius_pt'+self.kpt_num+'_dm'][img_id])
-            #print(target)
-            #img = np.array(ycbh5f['JPEGImages'][img_id])
-            img = np.array(ycbh5f[img_id])
-            ycbh5f.close()
+        #target = np.load(self._radialpath % img_id)
+        depth = read_depth(self._depthpath % str(int(img_id)))
+        mask = np.asarray(Image.open((self._maskpath % str(int(img_id)).zfill(4))),dtype=int)[:,:,0]
+        gtpose = np.load(self._gtposepath% str(int(img_id)))
+        img = Image.open(self._imgpath % img_id).convert('RGB')
+
         if self.transform is not None:
             img_torch, target_torch, sem_target_torch = self.transform(img_id, img, depth, mask, gtpose, self.kpt)
 
