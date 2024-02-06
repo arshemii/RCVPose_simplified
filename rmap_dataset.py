@@ -8,8 +8,10 @@ import h5py
 import open3d as o3d
 
 def read_depth(path):
-    # Possibly, I need depth factor here!
-    depth = np.asarray(Image.open(path)).copy()
+    with open(path) as f:
+            h,w = np.fromfile(f,dtype=np.uint32,count=2)
+            data = np.fromfile(f,dtype=np.uint16,count=w*h)
+            depth = data.reshape((h,w))
     return depth
 
 class RMapDataset(Dataset):
