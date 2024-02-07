@@ -20,7 +20,7 @@ if __name__ == "__main__":
     # Need to be adjusted the root_dataset
     parser.add_argument("--root_dataset",
                         type=str,
-                        default='./dataset/LINEMOD')
+                        default='./content/LINEMOD')
     parser.add_argument("--gpu_id", type=int, default=-1)
     parser.add_argument("--resume_train", type=str2bool, default=False)
     parser.add_argument("--batch_size",
