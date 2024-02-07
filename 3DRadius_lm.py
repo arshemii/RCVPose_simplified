@@ -13,8 +13,8 @@ linemod_K = np.array([[572.4114, 0., 325.2611],
 
 depthGeneration = False
 
-linemod_path = "content/LINEMODE/"
-original_linemod_path = "content/LINEMODE_ORIG/"
+linemod_path = "/content/LINEMODE/"
+original_linemod_path = "/content/LINEMODE_ORIG/"
 
 #IO function from PVNet               
 def project(xyz, K, RT):
