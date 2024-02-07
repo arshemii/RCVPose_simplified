@@ -27,7 +27,7 @@ class RMapDataset(Dataset):
 
         self._imgpath = os.path.join(self.root, self.obj_name,  'JPEGImages', '%s.jpg')
         #self._radialpath = os.path.join(self.root, 'LINEMOD_ORIG', self.obj_name, 'Out_pt'+kpt_num+'_dm', '%s.npy')
-        self._depthpath = os.path.join(self.root, self.obj_name, 'data', 'depth%s.dpt')
+        self._depthpath = os.path.join(self.root, self.obj_name, 'depth', 'depth%s.dpt')
         self._maskpath = os.path.join(self.root, self.obj_name, 'mask', '%s.png')
         self._gtposepath = os.path.join(self.root, self.obj_name, 'pose', 'pose%s.npy')
         self._imgsetpath = os.path.join(self.root, self.obj_name, 'Split', '%s.txt')
