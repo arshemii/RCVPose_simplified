@@ -13,7 +13,7 @@ linemod_K = np.array([[572.4114, 0., 325.2611],
 
 depthGeneration = False
 
-linemod_path = "datasets/LINEMOD/"
+linemod_path = "content/LINEMOD/"
 original_linemod_path = "datasets/LINEMOD_ORIG/"
 
 #IO function from PVNet               
