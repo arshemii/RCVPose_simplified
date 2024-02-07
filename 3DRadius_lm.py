@@ -127,7 +127,7 @@ if __name__=='__main__':
     for class_name in linemod_cls_names:
         print(class_name)
         
-        pcd_load = o3d.io.read_point_cloud(linemod_path+class_name+"/"+class_name+".ply")
+        pcd_load = o3d.io.read_point_cloud(linemod_path+class_name+"/"mesh.ply")
     
         xyz_load = np.asarray(pcd_load.points)
         print(xyz_load)
