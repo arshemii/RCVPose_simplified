@@ -727,7 +727,7 @@ if __name__ == "__main__":
                     default='/content')
     parser.add_argument('--model_dir',
                     type=str,
-                    default='ckpts/')   
+                    default='content/ckpts/')   
     parser.add_argument('--demo_mode',
                     type=bool,
                     default=False)  
