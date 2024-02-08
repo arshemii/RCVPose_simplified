@@ -44,6 +44,9 @@ if __name__ == "__main__":
     parser.add_argument("--optim",
                         type=str,
                         default='Adam')
+    parser.add_argument('--demo_mode',
+                    type=bool,
+                    default=False) 
 
     opts = parser.parse_args()
 
