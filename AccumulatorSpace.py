@@ -476,14 +476,14 @@ def estimate_6d_pose_lm(opts):
     
     for class_name in lm_cls_names:
         print("Evaluation on ", class_name)
-        rootPath = opts.root_dataset + "LINEMODE_ORIG/"+class_name+"/" 
-        rootpvPath = opts.root_dataset + "LINEMODE/"+class_name+"/" 
+        rootPath ="/content/LINEMODE_ORIG/"+class_name+"/" 
+        rootpvPath = "/content/LINEMODE/"+class_name+"/" 
         
-        test_list = open(opts.root_dataset + "LINEMODE/"+class_name+"/" +"Split/val.txt","r").readlines()
+        test_list = open("/content/LINEMODE/"+class_name+"/" +"Split/val.txt","r").readlines()
         test_list = [ s.replace('\n', '') for s in test_list]
         #print(test_list)
         
-        pcd_load = o3d.io.read_point_cloud(opts.root_dataset + "LINEMODE/"+class_name+"/mesh.ply")
+        pcd_load = o3d.io.read_point_cloud("/content/LINEMODE/"+class_name+"/mesh.ply")
         
         #time consumption
         net_time = 0
@@ -516,7 +516,7 @@ def estimate_6d_pose_lm(opts):
         xyz_load = np.asarray(pcd_load.points)
         #print(xyz_load)
         
-        keypoints=np.load(opts.root_dataset + "LINEMODE/"+class_name+"/"+"Outside9.npy")
+        keypoints=np.load("/content/LINEMODE/"+class_name+"/"+"Outside9.npy")
         #print(keypoints)
 
         #threshold of radii maximum limits
@@ -538,7 +538,7 @@ def estimate_6d_pose_lm(opts):
                 #if filename in test_list:
                     print("Evaluating ", filename)
                     estimated_kpts = np.zeros((3,3))
-                    RTGT = np.load(opts.root_dataset + "LINEMODE/"+class_name+"/pose/pose"+str(int(os.path.splitext(filename)[0]))+'.npy')
+                    RTGT = np.load("/content/LINEMODE/"+class_name+"/pose/pose"+str(int(os.path.splitext(filename)[0]))+'.npy')
                     #print(opts.root_dataset + "LINEMOD/"+class_name+"/pose/pose"+str(int(os.path.splitext(filename)[0]))+'.npy')
                     keypoint_count = 1
                     xyz_mm_icp = []
@@ -588,7 +588,7 @@ def estimate_6d_pose_lm(opts):
                             pixel_coor = np.where(sem_out==1)
                             radial_list = radial_out[pixel_coor]
                         else:
-                            radial_est = np.load(os.path.join( opts.root_dataset + "LINEMODE_ORIG/", 'estRadialMap', class_name, "Out_pt"+str(keypoint_count)+"_dm", os.path.splitext(filename)[0]+'.npy'))
+                            radial_est = np.load(os.path.join("/content/LINEMODE_ORIG/", 'estRadialMap', class_name, "Out_pt"+str(keypoint_count)+"_dm", os.path.splitext(filename)[0]+'.npy'))
                             radial_est = np.where(radial_est<=max_radii_dm[keypoint_count-1], radial_est,0)
                             sem_out = np.where(radial_est!=0,1,0)
                             #print(sem_out.shape)
