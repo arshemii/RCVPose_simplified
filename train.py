@@ -167,7 +167,8 @@ class Trainer():
                 break
 
     def Train(self):
-        max_epoch = int(math.ceil(1. * self.max_iter / len(self.train_loader)))
+        max_epoch = 3
+        #max_epoch = int(math.ceil(1. * self.max_iter / len(self.train_loader)))
         #self.scheduler  = torch.optim.lr_scheduler.ReduceLROnPlateau(self.optim, verbose=True)
         for epoch in tqdm.trange(self.epoch, max_epoch, desc='Train',
                                  ncols=80):
