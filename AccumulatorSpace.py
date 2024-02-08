@@ -18,29 +18,8 @@ import scipy
 
 lm_cls_names = ['ape', 'benchvise', 'cam', 'can', 'cat', 'duck', 'driller', 'eggbox', 'glue', 'holepuncher','iron','lamp','phone']
 lmo_cls_names = ['ape', 'can', 'cat', 'duck', 'driller',  'eggbox', 'glue', 'holepuncher']
-ycb_cls_names={1:'002_master_chef_can',
-           2:'003_cracker_box',
-           3:'004_sugar_box',
-           4:'005_tomato_soup_can',
-           5:'006_mustard_bottle',
-           6:'007_tuna_fish_can',
-           7:'008_pudding_box',
-           8:'009_gelatin_box',
-           9:'010_potted_meat_can',
-           10:'011_banana',
-           11:'019_pitcher_base',
-           12:'021_bleach_cleanser',
-           13:'024_bowl',
-           14:'025_mug',
-           15:'035_power_drill',
-           16:'036_wood_block',
-           17:'037_scissors',
-           18:'040_large_marker',
-           19:'051_large_clamp',
-           20:'052_extra_large_clamp',
-           21:'061_foam_brick'}
+
 lm_syms = ['eggbox', 'glue']
-ycb_syms = ['024_bowl','036_wood_block','051_large_clamp','052_extra_large_clamp','061_foam_brick']
 add_threshold = {
                   'eggbox': 0.019735770122546523,
                   'ape': 0.01421240983190395,
@@ -497,14 +476,14 @@ def estimate_6d_pose_lm(opts):
     
     for class_name in lm_cls_names:
         print("Evaluation on ", class_name)
-        rootPath = opts.root_dataset + "LINEMOD_ORIG/"+class_name+"/" 
-        rootpvPath = opts.root_dataset + "LINEMOD/"+class_name+"/" 
+        rootPath = opts.root_dataset + "LINEMODE_ORIG/"+class_name+"/" 
+        rootpvPath = opts.root_dataset + "LINEMODE/"+class_name+"/" 
         
-        test_list = open(opts.root_dataset + "LINEMOD/"+class_name+"/" +"Split/val.txt","r").readlines()
+        test_list = open(opts.root_dataset + "LINEMODE/"+class_name+"/" +"Split/val.txt","r").readlines()
         test_list = [ s.replace('\n', '') for s in test_list]
         #print(test_list)
         
-        pcd_load = o3d.io.read_point_cloud(opts.root_dataset + "LINEMOD/"+class_name+"/"+class_name+".ply")
+        pcd_load = o3d.io.read_point_cloud(opts.root_dataset + "LINEMODE/"+class_name+"/mesh.ply")
         
         #time consumption
         net_time = 0
@@ -524,7 +503,7 @@ def estimate_6d_pose_lm(opts):
                 #model = torch.nn.DataParallel(model)
                 #checkpoint = torch.load(model_path)
                 #model.load_state_dict(checkpoint)
-                optim = torch.optim.Adam(model.parameters(), lr=1e-3)
+                optim = torch.optim.Adam(model.parameters(), lr=1e-2)
                 model, _, _, _ = utils.load_checkpoint(model, optim, model_path)
                 model.eval()
                 model_list.append(model)
@@ -537,7 +516,7 @@ def estimate_6d_pose_lm(opts):
         xyz_load = np.asarray(pcd_load.points)
         #print(xyz_load)
         
-        keypoints=np.load(opts.root_dataset + "LINEMOD/"+class_name+"/"+"Outside9.npy")
+        keypoints=np.load(opts.root_dataset + "LINEMODE/"+class_name+"/"+"Outside9.npy")
         #print(keypoints)
 
         #threshold of radii maximum limits
