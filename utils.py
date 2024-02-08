@@ -17,8 +17,8 @@ def get_config():
     return {
         1:
         dict(
-            max_iteration=1000,
-            lr=1e-3,
+            max_iteration=100,
+            lr=1e-2,
             momentum=0.99,
             betas = (0.9,0.999),
             weight_decay=0,
