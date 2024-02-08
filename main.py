@@ -29,6 +29,9 @@ if __name__ == "__main__":
     parser.add_argument("--class_name",
                         type=str,
                         default='ape')
+    parser.add_argument('--using_ckpts',
+                    type=bool,
+                    default=False)
     parser.add_argument("--initial_lr",
                         type=float,
                         default=1e-4)
