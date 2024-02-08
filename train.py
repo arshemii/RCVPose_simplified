@@ -20,6 +20,10 @@ class Trainer():
         self.train_loader = data_loader[0]
         self.val_loader = data_loader[1]
         self.scheduler = []
+
+        if opts.mode in ['test', 'demo']:
+            self.Test()
+            return
         
         use_cuda = torch.cuda.is_available()
         self.device = torch.device("cuda" if use_cuda else "cpu")
@@ -31,8 +35,9 @@ class Trainer():
         else:
             print("Using", torch.cuda.device_count(), "GPU")
             self.model.to(self.device)
-
-        self.optim = torch.optim.Adam(self.model.parameters(), lr=opts.initial_lr)
+            
+        if opts.mode == 'train':
+            self.optim = torch.optim.Adam(self.model.parameters(), lr=opts.initial_lr)
 
         print(self.optim)
         if(opts.resume_train):
