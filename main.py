@@ -37,7 +37,7 @@ if __name__ == "__main__":
                         default='1')                        
     parser.add_argument('--model_dir',
                     type=str,
-                    default='ckpts/')   
+                    default='/ckpts/')   
     parser.add_argument('--dname',
                         type=str,
                         default='lm')
